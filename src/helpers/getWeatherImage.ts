@@ -319,6 +319,37 @@ const items: Record<WeatherCode, WeatherImage> = {
   },
 };
 
+export type WeatherReportType = {
+  current: {
+    temperature_2m: number;
+    interval: number;
+  };
+  hourly: {
+    time: string[];
+    temperature_2m: number[];
+    weather_code: WeatherCode[];
+  };
+  hourly_units: {
+    temperature_2m: string;
+    time: string;
+    weather_code: string;
+  };
+};
+
+export type AddressType = {
+  latitude: string;
+  longitude: string;
+  name: string;
+  admin1: string;
+  country: string;
+};
+export type Coordinates = {
+  lat: number;
+  lng: number;
+  city?: string;
+};
+
+export type SearchListItemParam = {item: AddressType};
 /**
  * A function to return an image representation of a WMO weather code.
  * @{link: https://www.nodc.noaa.gov/archive/arc0021/0002199/1.1/data/0-data/HTML/WMO-CODE/WMO4677.HTM}
@@ -330,6 +361,11 @@ const items: Record<WeatherCode, WeatherImage> = {
  */
 function getWeatherImage(weatherCode: WeatherCode) {
   // Write implementation for this function to return the "day" image for a given weather code.
+  return items[weatherCode].day.image;
+}
+function getWeatherDescription(weatherCode: WeatherCode) {
+  return items[weatherCode].day.description;
 }
 
 export default getWeatherImage;
+export { getWeatherDescription };
