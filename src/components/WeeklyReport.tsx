@@ -10,7 +10,7 @@ const WeeklyReportItem = ({
   report: WeatherReportType;
   index: number;
 }) => {
-  const {image} = getWeatherImage(report.hourly.weather_code[index]);
+  const image = getWeatherImage(report.hourly.weather_code[index]);
   const time = getTime(report.hourly.time[index]);
   return (
     <View style={styles.itemContainer}>
