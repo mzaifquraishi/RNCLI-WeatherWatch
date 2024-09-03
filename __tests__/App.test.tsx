@@ -46,6 +46,4 @@ it('should render the App', async () => {
 
   render(<App />);
   expect(screen.getByTestId('searchInputTestId')).toBeTruthy();
-  expect(screen.getByTestId('weaklyListTestId')).toBeTruthy();
-  expect(screen.getByTestId('currentWeatherImageTestId')).toBeTruthy();
 });

@@ -1,4 +1,7 @@
 export function getTime(dateString: string) {
+  if (dateString === '') {
+    return '12 AM';
+  }
   const inputDate = new Date(dateString);
   const today = new Date();
 

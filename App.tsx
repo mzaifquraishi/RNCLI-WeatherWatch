@@ -9,7 +9,8 @@ import {useWeatherReport} from './src/hooks/useWeatherReport';
 export default function App() {
   const address = useLocation();
   const [latlng, setlatlng] = useState(address);
-  const weatherReport = useWeatherReport(latlng);
+  const [weatherReport,error] = useWeatherReport(latlng);
+  console.log(error);
   return (
     <View style={styles.container}>
       <SearchBar setlatlng={setlatlng} />

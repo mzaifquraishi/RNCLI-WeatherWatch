@@ -7,17 +7,30 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import {AddressType, SearchListItem, SearchListItemParam} from '../helpers/getWeatherImage';
+import {
+  SearbarParam,
+  SearchListItem,
+  SearchListItemParam,
+} from '../helpers/getWeatherImage';
 
-const SearchBar = ({setlatlng}) => {
+const SearchBar = ({setlatlng, address}: SearbarParam) => {
   const searchRef = useRef(null);
   const [searchFocus, setSearchFocus] = useState(false);
   const [location, setLocation] = useState('');
   const [searchList, setSearchList] = useState([]);
-  const [searchData, setSearchData] = useState(null);
+  const [userInput, setUserInput] = useState(false);
   const search = (t: string) => {
+    setUserInput(true);
     setLocation(t);
   };
+  useEffect(() => {
+    if (address) {
+      setLocation(
+        address.city + ' ' + address.region + ' ' + address.country_name,
+      );
+    }
+  }, [address]);
+
   useEffect(() => {
     const getData = setTimeout(() => {
       async function fetchdata() {
@@ -31,12 +44,13 @@ const SearchBar = ({setlatlng}) => {
         );
         let data = await response.json();
         setSearchList(data.results);
-        setSearchData(data.results);
       }
-      fetchdata();
+      if (userInput) {
+        fetchdata();
+      }
     }, 1000);
     return () => clearTimeout(getData);
-  }, [location]);
+  }, [location, userInput]);
 
   const selectItem = (data: SearchListItem) => {
     const {latitude, longitude} = data;

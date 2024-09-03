@@ -347,9 +347,16 @@ export type Coordinates = {
   lat: number;
   lng: number;
   city?: string;
+  region?: string;
+  country_name?: string;
 };
 
 export type SearchListItemParam = {item: AddressType};
+
+export type SearbarParam = {
+  setlatlng: () => void;
+  address: Coordinates;
+};
 /**
  * A function to return an image representation of a WMO weather code.
  * @{link: https://www.nodc.noaa.gov/archive/arc0021/0002199/1.1/data/0-data/HTML/WMO-CODE/WMO4677.HTM}
@@ -368,4 +375,4 @@ function getWeatherDescription(weatherCode: WeatherCode) {
 }
 
 export default getWeatherImage;
-export { getWeatherDescription };
+export {getWeatherDescription};
